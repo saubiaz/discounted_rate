@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "598b24e3-9782-49ee-afaf-00462223dd8e",
+		"name": "DiscountRateService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetDiscountRateForOtherCustomersOverTwoYear.",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"status\":\"O\",\n\t\"itemList\":[{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t},\n\t{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t}],\n\t\"doj\":\"2016-05-26\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rest/retailStore/discountRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rest",
+						"retailStore",
+						"discountRate"
+					]
+				},
+				"description": "Service to get the net payable amount after applying the discounts respectively.\nIf the user has been a customer for over 2 years, he gets a 5% discount excluding the Groceries \n\nstatus : \"O\" (Others).\ndoj : dateOfJoining"
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiscountRateForEmployee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"status\":\"E\",\n\t\"itemList\":[{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t},\n\t{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t}],\n\t\"doj\":\"2019-05-26\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rest/retailStore/discountRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rest",
+						"retailStore",
+						"discountRate"
+					]
+				},
+				"description": "Service to get the net payable amount after applying the discounts respectively.\nIf the user is an employee of the store, he gets a 30% discount\nexcluding the Groceries\n\nstatus : \"E\" (Employee).\ndoj : dateOfJoining"
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiscountRateForAffiliate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"status\":\"A\",\n\t\"itemList\":[{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t},\n\t{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t}],\n\t\"doj\":\"2019-05-26\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rest/retailStore/discountRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rest",
+						"retailStore",
+						"discountRate"
+					]
+				},
+				"description": "Service to get the net payable amount after applying the discounts respectively.\n If the user is an affiliate of the store, he gets a 10% discount excluding the Groceries.\n \n status : \"A\" (Affiliate).\ndoj : dateOfJoining"
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiscountRateForOtherCustomers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"status\":\"0\",\n\t\"itemList\":[{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t},\n\t{\n\t\t\"category\":\"FURNITURE\",\n\t\t\"amount\":100\n\t}],\n\t\"doj\":\"2019-05-26\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rest/retailStore/discountRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rest",
+						"retailStore",
+						"discountRate"
+					]
+				},
+				"description": "Service to get the net payable amount after applying the discounts respectively.\nFor every $100 on the bill, there would be a $ 5 discount (e.g. for $ 990, you get $ 45\nas a discount).\n\nstatus : \"O\" (Others).\ndoj : dateOfJoining"
+			},
+			"response": []
+		}
+	]
+}

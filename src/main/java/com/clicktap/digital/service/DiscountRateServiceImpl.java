@@ -34,13 +34,14 @@ public class DiscountRateServiceImpl  implements DiscountRateService{
             if (!StringUtils.isEmpty(discountRequest.getStatus()) && discountRequest.getStatus().equalsIgnoreCase("E")) {
                 discountRateResponse.setDiscount(getDiscountAmount(discountRequest.getItemList()).multiply(BigDecimal.valueOf(30)).divide(BigDecimal.valueOf(100)));
             } else if (!StringUtils.isEmpty(discountRequest.getStatus()) && discountRequest.getStatus().equalsIgnoreCase("A")) {
-
                 discountRateResponse.setDiscount(getDiscountAmount(discountRequest.getItemList()).multiply(BigDecimal.valueOf(10)).divide(BigDecimal.valueOf(100)));
             } else if (checkDateValidForDiscount(discountRequest.getDoj())) {
                 discountRateResponse.setDiscount(getDiscountAmount(discountRequest.getItemList()).multiply(BigDecimal.valueOf(5)).divide(BigDecimal.valueOf(100)));
             } else {
                 if (totalAmount.compareTo(BigDecimal.valueOf(99.0)) > 0) {
                     discountRateResponse.setDiscount(totalAmount.multiply(BigDecimal.valueOf(5)).divide(BigDecimal.valueOf(100)));
+                }else {
+                    discountRateResponse.setDiscount(BigDecimal.ZERO);
                 }
 
             }
@@ -52,7 +53,7 @@ public class DiscountRateServiceImpl  implements DiscountRateService{
         return discountRateResponse;
     }
 
-    private BigDecimal calculateTotalAmount(List<Item> itemList) {
+    public BigDecimal calculateTotalAmount(List<Item> itemList) {
         /**
          *   calculate the total amount
          */
@@ -60,18 +61,18 @@ public class DiscountRateServiceImpl  implements DiscountRateService{
         return itemList.stream().map(Item::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private boolean checkDateValidForDiscount(String doj) {
+    public boolean checkDateValidForDiscount(String doj) {
         // Range = End date - Start date
         long range = ChronoUnit.DAYS.between(!StringUtils.isEmpty(doj)?LocalDate.parse(doj):LocalDate.now() , LocalDate.now());
         return range >= (365 * 2);
     }
 
-    private BigDecimal getDiscountAmount(List<Item> itemList) {
+    public BigDecimal getDiscountAmount(List<Item> itemList) {
         /**
          * calculate the amount by not including the Grocery category
           */
 
-        return itemList.stream().filter(item -> item.getCategory().equalsIgnoreCase("GROCERY")).map(Item::getAmount)
+        return itemList.stream().filter(item -> !item.getCategory().equalsIgnoreCase("GROCERY")).map(Item::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 public class DiscountRateResponse {
 
 	private BigDecimal netPayableAmount;
-	private BigDecimal discount;
+	private BigDecimal discount = BigDecimal.ZERO;
 
 	public BigDecimal getNetPayableAmount() {
 		return netPayableAmount;
